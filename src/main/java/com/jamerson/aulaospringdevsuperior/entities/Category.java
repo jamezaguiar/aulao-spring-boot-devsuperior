@@ -2,17 +2,23 @@ package com.jamerson.aulaospringdevsuperior.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "category")
     private List<Product> products = new ArrayList<Product>();
 
     public Category() {
